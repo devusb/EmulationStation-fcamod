@@ -1,3 +1,4 @@
+#include <cstdint>
 #include <string>
 #include "ApiSystem.h"
 #include "DisplayPanelControl.h"

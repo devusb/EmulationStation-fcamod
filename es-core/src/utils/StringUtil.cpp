@@ -1,3 +1,4 @@
+#include <cstdint>
 #include <string>
 #include "utils/StringUtil.h"
 

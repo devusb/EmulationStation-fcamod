@@ -14,8 +14,9 @@
 
 //#include <go2/display.h>
 //#include <go2/input.h>
-#include <go2/audio.h>
-#include <drm/drm_fourcc.h>
+// go2 removed — using SDL2 KMSDRM
+// #include <go2/audio.h>
+// #include <drm/drm_fourcc.h>
 //#include "BatteryIcons.h"
 //#include "VolumeIcons.h"
 //#include "WifiIcons.h"
@@ -92,8 +93,9 @@ namespace Renderer
 		SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,  24);
 		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 1);
-		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 0);
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
 //#endif
 	} // setupWindow
 
