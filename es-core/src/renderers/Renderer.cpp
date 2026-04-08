@@ -89,6 +89,10 @@ namespace Renderer
 			initialCursorState = (SDL_ShowCursor(0) != 0);
 			SDL_GetDesktopDisplayMode(0, &dispMode);
 		}
+		else
+		{
+			SDL_ShowCursor(0);
+		}
 
 		if (!Settings::getInstance()->getBool("Windowed"))
 			SDL_SetHint(SDL_HINT_VIDEO_HIGHDPI_DISABLED, "1");
