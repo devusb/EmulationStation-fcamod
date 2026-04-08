@@ -6,6 +6,7 @@ option(RPI "Set to ON to enable the Raspberry PI video player (omxplayer)" ${RPI
 option(CEC "Set to ON to enable CEC" ${CEC})
 
 project(emulationstation-all)
+include_directories(@sdl2MixerDev@/include/SDL2)
 
 #-------------------------------------------------------------------------------
 #add local find scripts to CMAKE path
