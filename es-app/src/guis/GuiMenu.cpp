@@ -1709,7 +1709,8 @@ void GuiMenu::openOtherSettings()
 			if (!setRepo.empty())
 			  mWindow->displayNotificationMessage(setRepo);
 		}
-		SystemConf::getInstance()->set("system.timezone", es_timezones->getSelected());
+		if (!es_timezones->getSelectedObjects().empty())
+			SystemConf::getInstance()->set("system.timezone", es_timezones->getSelected());
 	});
 
 	// Clock time format (14:42 or 2:42 pm)
