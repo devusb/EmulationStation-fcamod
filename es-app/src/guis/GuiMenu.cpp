@@ -82,7 +82,11 @@ GuiMenu::GuiMenu(Window* window, bool animate) : GuiComponent(window), mMenu(win
 	
 	addEntry(_("QUIT"), !Settings::getInstance()->getBool("ShowOnlyExit"), [this] {openQuitMenu(); }, "iconQuit");
 
-	addEntry(_("BAT") + ": " + std::string(getShOutput(R"(cat /sys/class/power_supply/rk817-battery/capacity 2>/dev/null || echo "?")")) + "%" + " | " + _("SND") + ": " + std::string(getShOutput(R"(@amixer@ -c 0 get Master 2>/dev/null | grep -o '[0-9]*%' | head -1 || echo "?")")) + " | " + _("BRT") + ": " + std::to_string(ApiSystem::getInstance()->getBrightnessLevel()) + "% | " + _("WIFI") + ": " + std::string(getShOutput(R"(cat /sys/class/net/wlan0/operstate 2>/dev/null || echo "N/A")")), false, [this] {  });
+	// Status bar shell commands — substituted at build time via @placeholder@ markers.
+	// @batteryCommand@ must output a bare integer (e.g. "85"), "%" is appended by C++.
+	// @volumeCommand@ must output a bare integer (e.g. "80"), "%" is appended by C++.
+	// @wifiCommand@ must output a short status string (e.g. "up", "down", "N/A").
+	addEntry(_("BAT") + ": " + std::string(getShOutput(R"(@batteryCommand@)")) + "%" + " | " + _("SND") + ": " + std::string(getShOutput(R"(@volumeCommand@)")) + "%" + " | " + _("BRT") + ": " + std::to_string(ApiSystem::getInstance()->getBrightnessLevel()) + "% | " + _("WIFI") + ": " + std::string(getShOutput(R"(@wifiCommand@)")), false, [this] {  });
 
 	addChild(&mMenu);
 	addVersionInfo();
